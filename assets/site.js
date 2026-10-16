@@ -61,13 +61,36 @@
     update();
   }
 
-  // Buttons that name a plan preselect it in the contact form.
-  var pick = document.getElementById("f-type");
-  if (pick) {
-    document.querySelectorAll("[data-type]").forEach(function (a) {
-      a.addEventListener("click", function () { pick.value = a.getAttribute("data-type"); });
+  // Tabs. Arrow keys move between tabs, as the ARIA tabs pattern expects.
+  var selectTab = function (tab) {
+    var list = tab.closest("[role=tablist]");
+    list.querySelectorAll("[role=tab]").forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute("aria-selected", String(on));
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
     });
-  }
+  };
+  document.querySelectorAll("[role=tablist]").forEach(function (list) {
+    var tabs = Array.prototype.slice.call(list.querySelectorAll("[role=tab]"));
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener("click", function () { selectTab(tab); });
+      tab.addEventListener("keydown", function (e) {
+        var next = e.key === "ArrowRight" ? tabs[(i + 1) % tabs.length] : e.key === "ArrowLeft" ? tabs[(i - 1 + tabs.length) % tabs.length] : null;
+        if (next) { e.preventDefault(); selectTab(next); next.focus(); }
+      });
+    });
+  });
+
+  // Links that open a specific tab (Book a call, Get a free answer check), and preselect a plan in the form.
+  var pick = document.getElementById("f-type");
+  document.querySelectorAll("[data-tab-target]").forEach(function (a) {
+    a.addEventListener("click", function () {
+      var tab = document.getElementById(a.getAttribute("data-tab-target"));
+      if (tab) selectTab(tab);
+      if (pick && a.getAttribute("data-type")) pick.value = a.getAttribute("data-type");
+    });
+  });
 
   var printBtn = document.getElementById("print-cap");
   if (printBtn) printBtn.addEventListener("click", function () { window.print(); });

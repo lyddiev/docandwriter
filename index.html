@@ -196,8 +196,8 @@
     <a class="brand" href="/" aria-label="Doc &amp; Writer home"><img src="/assets/img/logo.svg" alt="" width="10" height="26"><span>Doc &amp; Writer</span></a>
     <nav class="nav" aria-label="Main"><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#results">Results</a><a href="#faq">FAQ</a></nav>
     <button class="theme" id="theme" type="button" aria-label="Switch light or dark mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
-    <a class="btn btn-sm" href="#contact">Book a call</a>
-    <details class="menu"><summary>Menu</summary><nav aria-label="Main"><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#results">Results</a><a href="#faq">FAQ</a><a href="#contact">Free answer check</a><a href="#contact">Book a call</a></nav></details>
+    <a class="btn btn-sm" href="#contact" data-tab-target="tab-book">Book a call</a>
+    <details class="menu"><summary aria-label="Menu"><svg class="i-open" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="i-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></summary><nav aria-label="Main"><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#results">Results</a><a href="#faq">FAQ</a><a href="#contact" data-tab-target="tab-check">Free answer check</a><a href="#contact" data-tab-target="tab-book">Book a call</a></nav></details>
   </div>
 </header>
 <main id="main">
@@ -206,7 +206,7 @@
     <h1>Your AI agent is only as right as your help center.</h1>
     <div>
       <p class="lede">We find the articles giving customers wrong answers, fix them, and keep them current with every release. For B2B software support teams.</p>
-      <div class="actions"><a class="btn" href="#contact" data-type="Free answer check">Get a free answer check</a><a class="btn btn-ghost" href="#contact">Book a 25-minute call</a></div>
+      <div class="actions"><a class="btn" href="#contact" data-type="Free answer check" data-tab-target="tab-check">Get a free answer check</a><a class="btn btn-ghost" href="#contact" data-tab-target="tab-book">Book a 25-minute call</a></div>
       <p class="fine">The free check tests 25 questions and takes 5 business days. No access to your systems needed.</p>
     </div>
     <article class="article" id="article" data-state="before" aria-label="Sample help article, before and after our edit">
@@ -302,7 +302,7 @@
           <li>A short video walking through the three that matter most</li>
           <li>No access to your systems needed</li>
         </ul>
-        <a class="btn btn-ghost" href="#contact" data-type="Free answer check">Get a free answer check</a>
+        <a class="btn btn-ghost" href="#contact" data-type="Free answer check" data-tab-target="tab-check">Get a free answer check</a>
       </div>
       <div class="plan pick">
         <span class="flag">Where most teams start</span>
@@ -316,7 +316,7 @@
           <li>An owner and a review date for every article</li>
           <li>A report you can take to leadership</li>
         </ul>
-        <a class="btn" href="#contact" data-type="Audit and fix sprint">Start with an audit</a>
+        <a class="btn" href="#contact" data-type="Audit and fix sprint" data-tab-target="tab-check">Start with an audit</a>
         <p class="note">If the audit is not worth the fee, we refund it.</p>
       </div>
       <div class="plan">
@@ -330,7 +330,7 @@
           <li>Review reminders so every article stays owned</li>
           <li>A monthly report on answers, gaps, and the tickets they caused</li>
         </ul>
-        <a class="btn btn-ghost" href="#contact" data-type="Monthly plan">Ask about the monthly plan</a>
+        <a class="btn btn-ghost" href="#contact" data-type="Monthly plan" data-tab-target="tab-check">Ask about the monthly plan</a>
       </div>
     </div>
     <div class="extras">
@@ -351,45 +351,96 @@
       <h2>How hiring us works</h2>
       <p>From first call to kickoff in about a week.</p>
     </div>
-    <ol class="hire">
-      <li><span class="when">Day 1</span><h3>Book a call or request the free check</h3><p>25 minutes by phone or video. Tell us what your help center and agent run on.</p></li>
-      <li><span class="when">Same day</span><h3>Get a proposal</h3><p>A one-page scope with a fixed price and our services agreement. We sign your NDA if you need one.</p></li>
-      <li><span class="when">When you are ready</span><h3>Sign and pay online</h3><p>Sign electronically and pay by card or ACH from the invoice link. W-9 on request.</p></li>
-      <li><span class="when">Within 5 business days</span><h3>Kickoff</h3><p>We get access, pull your ticket export, and start the audit.</p></li>
+    <ol class="track">
+      <li><span class="dot">1</span><span class="when">Day 1</span><h3>Talk to us</h3><p>A 25-minute call, or a free check request.</p></li>
+      <li><span class="dot">2</span><span class="when">Same day</span><h3>Get a proposal</h3><p>One page: scope, fixed price, and our agreement.</p></li>
+      <li><span class="dot">3</span><span class="when">When you are ready</span><h3>Sign and pay</h3><p>Sign online. Pay by card or ACH.</p></li>
+      <li><span class="dot">4</span><span class="when">Within 5 business days</span><h3>Kickoff</h3><p>We get access and start the audit.</p></li>
     </ol>
-    <p class="needs"><b>What we need from you</b><span>Editor access to your help center</span><span>A recent ticket export</span><span>About two hours a week from someone who knows the product</span></p>
+    <div class="needs">
+      <h3>What we need from you</h3>
+      <ul>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>Editor access to your help center</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 16h7"/></svg>A recent ticket export</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>About 2 hours a week from a product expert</li>
+      </ul>
+    </div>
   </div>
 </section>
 
 <section class="section band" id="results">
   <div class="wrap">
     <div class="head">
-      <h2>Results our team has delivered</h2>
-      <p>From knowledge programs run at Meta, O&#8209;I Glass, and Hunter Douglas, and for Doc &amp; Writer clients.</p>
+      <h2>Results</h2>
+      <p>From knowledge programs our team has led, and from Doc &amp; Writer clients.</p>
     </div>
-    <div class="cases">
-      <div class="case"><h3>Meta <span>Global support operations, 2022 to 2026</span></h3><ul>
-        <li>Ran the knowledge base audit and overhaul that took an internal AI agent from experiment to production, where it lifted CSAT 3 to 5% in key workflows.</li>
-        <li>Expanded machine translation of the knowledge base from 16 to 30 languages.</li>
-        <li>Cut average handling time from 19 minutes to 9 across 22 products with an AI payment verification tool.</li>
-        <li>Delivered a CMS migration for a technical publications library with zero downtime.</li></ul></div>
-      <div class="case"><h3>O&#8209;I Glass <span>A $250M R&amp;D program across three plants</span></h3><ul>
-        <li>Authored and governed 900+ standard operating procedures as the single source of truth for operations.</li>
-        <li>Shortened onboarding 35% for new engineers by rolling out Microsoft Copilot to 300 of them.</li>
-        <li>Reduced project timelines from 25 days to 4 with a QA validation standard the organization adopted.</li></ul></div>
-      <div class="case"><h3>Hunter Douglas <span>Product content, 2020 to 2021</span></h3><ul>
-        <li>Scaled product, installation, and training content from 3 pilot sites to thousands of dealers.</li></ul></div>
-      <div class="case"><h3>Doc &amp; Writer clients <span>2020 to present</span></h3><ul>
-        <li>Bankers&rsquo; Bank of the West: an IT knowledge base with an owner for every protocol and automated accuracy reviews.</li>
-        <li>AIRBOX: client setup time cut 30% by standardizing UL and EPA compliance protocols.</li>
-        <li>Idomoo and Mozilla: engineering documentation in Git and Markdown, and API documentation edits for MDN.</li></ul></div>
-    </div>
-    <div class="quotes">
-      <figure class="quote lead"><blockquote>&hellip;he owned the knowledge foundation behind it, driving a large-scale KB feedback audit and delivering the knowledge-base overhaul that made the Co-Pilot recommendations trustworthy and deployable as the program scaled from experiments to production.</blockquote><figcaption><strong>Sharmilla Abhilash</strong>Global Operations Senior Program Manager, Meta</figcaption></figure>
-      <figure class="quote"><blockquote>He effectively gathered information from various parties and distilled complex topics into easy to understand documents which were used across continents.</blockquote><figcaption><strong>Michael Hu</strong>Technology Licensing Lead, O-I</figcaption></figure>
-      <figure class="quote"><blockquote>His collaborative approach was essential to expedite the adoption of CCMS and LMS programs that were new for the glass manufacturing environment.</blockquote><figcaption><strong>Javier Reyes, MSc, PMP</strong>Project Planning Director, O-I</figcaption></figure>
-      <figure class="quote"><blockquote>One of Alexander&rsquo;s standout strengths is his mastery of timelines and dependencies. He orchestrates multiple moving parts with precision, ensuring that projects stay on track and stakeholders remain aligned.</blockquote><figcaption><strong>Jaime Gallegos</strong>Program Manager, Meta</figcaption></figure>
-      <figure class="quote"><blockquote>I had the pleasure of managing Alexander directly for 8 months and was more than pleased with his skill and thought leadership.</blockquote><figcaption><strong>Dalton Manci</strong>AI Learning &amp; Knowledge Technology Architect, Meta</figcaption></figure>
+    <div class="tabs" data-tabs>
+      <div class="tablist" role="tablist" aria-label="Results by organization">
+        <button role="tab" id="t-meta" aria-controls="p-meta" aria-selected="true">Meta</button>
+        <button role="tab" id="t-oi" aria-controls="p-oi" aria-selected="false" tabindex="-1">O&#8209;I Glass</button>
+        <button role="tab" id="t-hd" aria-controls="p-hd" aria-selected="false" tabindex="-1">Hunter Douglas</button>
+        <button role="tab" id="t-cl" aria-controls="p-cl" aria-selected="false" tabindex="-1">Clients</button>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="p-meta" aria-labelledby="t-meta">
+        <div class="res">
+          <div>
+            <p class="ctx">Global support operations, 2022 to 2026. 14,000+ agents in 15+ markets.</p>
+            <ul class="wins">
+              <li><b>Experiment to production.</b> Ran the knowledge base audit and overhaul behind an internal AI agent, which then lifted CSAT 3 to 5% in key workflows.</li>
+              <li><b>19 minutes to 9.</b> Average handling time across 22 products, with an AI payment verification tool.</li>
+              <li><b>16 to 30 languages.</b> Machine translation coverage of the knowledge base.</li>
+              <li><b>Zero downtime.</b> A CMS migration for a technical publications library.</li>
+            </ul>
+          </div>
+          <figure class="pull"><blockquote>&ldquo;&hellip;he owned the knowledge foundation behind it, driving a large-scale KB feedback audit and delivering the knowledge-base overhaul that made the Co-Pilot recommendations trustworthy and deployable as the program scaled from experiments to production.&rdquo;</blockquote><figcaption><strong>Sharmilla Abhilash</strong>Global Operations Senior Program Manager, Meta</figcaption></figure>
+        </div>
+        <div class="minis">
+          <figure><blockquote>&ldquo;One of Alexander&rsquo;s standout strengths is his mastery of timelines and dependencies.&rdquo;</blockquote><figcaption><strong>Jaime Gallegos</strong>Program Manager, Meta</figcaption></figure>
+          <figure><blockquote>&ldquo;I had the pleasure of managing Alexander directly for 8 months and was more than pleased with his skill and thought leadership.&rdquo;</blockquote><figcaption><strong>Dalton Manci</strong>AI Learning &amp; Knowledge Technology Architect, Meta</figcaption></figure>
+        </div>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="p-oi" aria-labelledby="t-oi" hidden>
+        <div class="res">
+          <div>
+            <p class="ctx">A $250M R&amp;D program across three plants.</p>
+            <ul class="wins">
+              <li><b>900+ procedures.</b> Authored and governed as the single source of truth for operations.</li>
+              <li><b>35% faster onboarding</b> for new engineers, with Microsoft Copilot rolled out to 300 of them.</li>
+              <li><b>25 days to 4.</b> Project timelines, after a QA validation standard the organization adopted.</li>
+            </ul>
+          </div>
+          <div class="stack">
+            <figure class="pull"><blockquote>&ldquo;His collaborative approach was essential to expedite the adoption of CCMS and LMS programs that were new for the glass manufacturing environment.&rdquo;</blockquote><figcaption><strong>Javier Reyes, MSc, PMP</strong>Project Planning Director, O&#8209;I</figcaption></figure>
+            <figure class="mini"><blockquote>&ldquo;He effectively gathered information from various parties and distilled complex topics into easy to understand documents which were used across continents.&rdquo;</blockquote><figcaption><strong>Michael Hu</strong>Technology Licensing Lead, O&#8209;I</figcaption></figure>
+          </div>
+        </div>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="p-hd" aria-labelledby="t-hd" hidden>
+        <div class="res">
+          <div>
+            <p class="ctx">Product content, 2020 to 2021.</p>
+            <ul class="wins">
+              <li><b>3 pilot sites to thousands of dealers.</b> Product, installation, and training content, scaled from pilot to full rollout.</li>
+              <li><b>12 product lines</b> migrated to Adobe Experience Manager Guides.</li>
+            </ul>
+          </div>
+          <div class="stat"><b>Thousands</b><span>of dealers working from one content source, up from 3 pilot sites</span></div>
+        </div>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="p-cl" aria-labelledby="t-cl" hidden>
+        <div class="res">
+          <div>
+            <p class="ctx">Doc &amp; Writer clients since 2020.</p>
+            <ul class="wins">
+              <li><b>Bankers&rsquo; Bank of the West.</b> An IT knowledge base with an owner for every protocol and automated accuracy reviews.</li>
+              <li><b>AIRBOX.</b> Client setup time cut 30% by standardizing UL and EPA compliance protocols.</li>
+              <li><b>Idomoo.</b> Global engineering documentation moved to Git and Markdown.</li>
+              <li><b>Mozilla.</b> API and SDK documentation edits for MDN.</li>
+            </ul>
+          </div>
+          <div class="stat"><b>30%</b><span>faster client setup at AIRBOX</span></div>
+        </div>
+      </div>
     </div>
     <p class="quotes-note"><a href="https://www.linkedin.com/in/alexanderdade/details/recommendations/">Read all 17 recommendations on LinkedIn</a></p>
   </div>
@@ -397,7 +448,7 @@
 
 <section class="section" id="faq">
   <div class="wrap faq-grid">
-    <div><h2>Questions</h2><p class="lede">Anything else, ask us on the call.</p></div>
+    <div><h2>FAQ</h2><p class="lede">Anything else, ask us on the call.</p></div>
     <div class="faq">
       <details><summary>What do you need for the free answer check?</summary><p>Your help center address, and where customers reach your AI agent if it is public. No logins, no data exports, and no access to your systems.</p></details>
       <details><summary>How do you decide an answer is wrong?</summary><p>We grade each answer against your own published sources: your pricing page, release notes, and the rest of your help center. When your sources disagree with each other, we flag it and your product expert makes the call.</p></details>
@@ -427,35 +478,36 @@
 <section class="section" id="contact">
   <div class="wrap">
     <div class="head">
-      <h2>Let&rsquo;s look at your help center.</h2>
-      <p>Request the free check or book a call. We reply within one business day.</p>
+      <h2>Start with a free answer check.</h2>
+      <p>Or book a 25-minute call. We reply within one business day.</p>
     </div>
-    <div class="contact">
-      <div class="panel">
-        <h3>Send a request</h3>
-        <p>The free check needs only your help center address.</p>
+    <div class="tabs boxed" data-tabs>
+      <div class="tablist" role="tablist" aria-label="Contact options">
+        <button role="tab" id="tab-check" aria-controls="p-check" aria-selected="true">Request the free check</button>
+        <button role="tab" id="tab-book" aria-controls="p-book" aria-selected="false" tabindex="-1">Book a call</button>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="p-check" aria-labelledby="tab-check">
         <form class="form" name="contact" method="POST" action="/thanks" data-netlify="true" netlify-honeypot="company-website">
           <input type="hidden" name="form-name" value="contact">
           <p class="hidden"><label>Leave this empty <input name="company-website"></label></p>
-          <div class="field"><label for="f-type">What do you need?</label>
-            <select id="f-type" name="request_type"><option>Free answer check</option><option>Audit and fix sprint</option><option>Monthly plan</option><option>A one-time project</option><option>Something else</option></select></div>
+          <div class="two">
+            <div class="field"><label for="f-type">What do you need?</label>
+              <select id="f-type" name="request_type"><option>Free answer check</option><option>Audit and fix sprint</option><option>Monthly plan</option><option>A one-time project</option><option>Something else</option></select></div>
+            <div class="field"><label for="f-url">Help center address</label><input id="f-url" name="help_center_url" placeholder="help.example.com"></div>
+          </div>
           <div class="two">
             <div class="field"><label for="f-name">Name <span class="req">*</span></label><input id="f-name" name="name" autocomplete="name" required></div>
             <div class="field"><label for="f-email">Work email <span class="req">*</span></label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
           </div>
           <div class="two">
             <div class="field"><label for="f-company">Company</label><input id="f-company" name="company" autocomplete="organization"></div>
-            <div class="field"><label for="f-url">Help center address</label><input id="f-url" name="help_center_url" placeholder="help.example.com"></div>
+            <div class="field"><label for="f-agent">Where customers reach your AI agent</label><input id="f-agent" name="ai_agent" placeholder="Optional"></div>
           </div>
-          <div class="field"><label for="f-agent">Where customers reach your AI agent, if you have one</label><input id="f-agent" name="ai_agent" placeholder="For example, the chat on our pricing page"></div>
           <div class="field"><label for="f-msg">Anything we should know?</label><textarea id="f-msg" name="message"></textarea></div>
-          <div><button class="btn" type="submit">Send request</button></div>
-          <p class="small muted" style="margin:0">We use what you send only to reply and prepare your check. <a href="/privacy-policy">Privacy policy</a>.</p>
+          <div class="submit-row"><button class="btn" type="submit">Send request</button><p class="small muted">We use what you send only to reply and prepare your check. <a href="/privacy-policy">Privacy</a>.</p></div>
         </form>
       </div>
-      <div class="panel">
-        <h3>Book a 25-minute call</h3>
-        <p>Pick a time that works. Phone or video.</p>
+      <div class="tabpanel" role="tabpanel" id="p-book" aria-labelledby="tab-book" hidden>
         <div class="calendly-inline-widget cal-embed" data-url="https://calendly.com/docandwriter/discovery-call?hide_gdpr_banner=1&amp;primary_color=16283c"></div>
         <noscript><p><a href="https://calendly.com/docandwriter/discovery-call">Open the booking page</a></p></noscript>
       </div>
