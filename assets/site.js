@@ -15,6 +15,14 @@
     });
   }
 
+  // Header turns solid once the page scrolls.
+  var mast = document.querySelector(".mast");
+  if (mast) {
+    var onScroll = function () { mast.classList.toggle("scrolled", window.scrollY > 8); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+
   // Mobile menu closes after a choice.
   document.querySelectorAll(".menu nav a").forEach(function (a) {
     a.addEventListener("click", function () { a.closest("details").removeAttribute("open"); });
