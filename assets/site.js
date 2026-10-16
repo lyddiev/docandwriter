@@ -62,6 +62,42 @@
     });
   });
 
+  // Mobile switchers: show one step or plan at a time. Tap a label or swipe.
+  document.querySelectorAll(".mtabs").forEach(function (bar) {
+    var group = document.getElementById(bar.getAttribute("data-for"));
+    if (!group) return;
+    group.setAttribute("data-mgroup", "");
+    var btns = Array.prototype.slice.call(bar.querySelectorAll("button"));
+    var items = Array.prototype.slice.call(group.querySelectorAll(":scope > .m-item"));
+    var show = function (n) {
+      btns.forEach(function (b, i) { b.setAttribute("aria-pressed", String(i === n)); });
+      items.forEach(function (it, i) { it.classList.toggle("m-on", i === n); });
+    };
+    var current = function () { return Math.max(0, btns.findIndex(function (b) { return b.getAttribute("aria-pressed") === "true"; })); };
+    btns.forEach(function (b, i) { b.addEventListener("click", function () { show(i); }); });
+    var x0 = null, y0 = null;
+    group.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+    group.addEventListener("touchend", function (e) {
+      if (x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+      x0 = null;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        var n = current() + (dx < 0 ? 1 : -1);
+        if (n >= 0 && n < items.length) show(n);
+      }
+    }, { passive: true });
+  });
+
+  // /#book opens the booking tab, from this page or from another page.
+  var openBook = function () {
+    if (location.hash !== "#book") return;
+    var t = document.getElementById("tab-book"), c = document.getElementById("contact");
+    if (t) selectTab(t);
+    if (c) c.scrollIntoView();
+  };
+  window.addEventListener("hashchange", openBook);
+  openBook();
+
   // Soft light that follows the pointer across tiles.
   document.querySelectorAll(".tile").forEach(function (t) {
     t.addEventListener("pointermove", function (e) {

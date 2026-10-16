@@ -196,8 +196,8 @@
     <a class="brand" href="/" aria-label="Doc &amp; Writer home"><img src="/assets/img/logo.svg" alt="" width="9" height="24"><span>Doc &amp; Writer</span></a>
     <nav class="nav" aria-label="Main"><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#results">Results</a><a href="#faq">FAQ</a></nav>
     <button class="theme" id="theme" type="button" aria-label="Switch light or dark mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
-    <a class="btn btn-sm" href="#contact" data-tab-target="tab-book">Book a call</a>
-    <details class="menu"><summary aria-label="Menu"><svg class="i-open" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg><svg class="i-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></summary><nav aria-label="Main"><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#results">Results</a><a href="#faq">FAQ</a><a class="btn" href="#contact" data-tab-target="tab-book">Book a call</a></nav></details>
+    <a class="btn btn-sm" href="#book" data-tab-target="tab-book">Book a call</a>
+    <details class="menu"><summary aria-label="Menu"><svg class="i-open" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg><svg class="i-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></summary><nav aria-label="Main"><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#results">Results</a><a href="#faq">FAQ</a><a class="btn" href="#book" data-tab-target="tab-book">Book a call</a></nav></details>
   </div>
 </header>
 <main id="main">
@@ -272,14 +272,15 @@
       <h2>How we check your answers</h2>
       <p>No black box. Every verdict comes with the source behind it.</p>
     </div>
-    <div class="bento">
-      <div class="tile s6"><span class="step-n">1</span><h3>Build the question set</h3><p>Free check: 25 questions we write from your pricing, policies, and help center. Audit: 100 from your own support tickets.</p>
+    <div class="mtabs" role="group" aria-label="Steps" data-for="how-steps"><button type="button" aria-pressed="true">Questions</button><button type="button" aria-pressed="false">Ask</button><button type="button" aria-pressed="false">Grade</button><button type="button" aria-pressed="false">Fix</button></div>
+    <div class="bento" id="how-steps">
+      <div class="tile s6 m-item m-on"><span class="step-n">1</span><h3>Build the question set</h3><p>Free check: 25 questions we write from your pricing, policies, and help center. Audit: 100 from your own support tickets.</p>
         <div data-nosnippet class="viz chips"><span>Can I return an item after 20 days?</span><span>Is there a setup fee?</span><span>Do you ship to Canada?</span><span>What are your support hours?</span><span class="more">+ 21 more</span></div></div>
-      <div class="tile s6"><span class="step-n">2</span><h3>Ask your agent and search your help center</h3><p>We record exactly what each one says. If your agent sits behind a login, the free check covers the help center.</p>
+      <div class="tile s6 m-item"><span class="step-n">2</span><h3>Ask your agent and search your help center</h3><p>We record exactly what each one says. If your agent sits behind a login, the free check covers the help center.</p>
         <div data-nosnippet class="viz mini-chat"><span class="u">Do you ship to Canada?</span><span class="b">I could not find information about that.</span></div></div>
-      <div class="tile s6"><span class="step-n">3</span><h3>Grade each answer against your own sources</h3><p>An answer is wrong when it contradicts your pricing, your policies, or another article. Where your sources disagree, your subject expert decides.</p>
+      <div class="tile s6 m-item"><span class="step-n">3</span><h3>Grade each answer against your own sources</h3><p>An answer is wrong when it contradicts your pricing, your policies, or another article. Where your sources disagree, your subject expert decides.</p>
         <div data-nosnippet class="viz cmp"><div><small>Agent said</small>There is a $99 setup fee</div><div><small>Pricing page says</small>No setup fee</div><div class="v"><span>Verdict</span><span class="verdict v-wrong">Wrong</span></div></div></div>
-      <div class="tile s6"><span class="step-n">4</span><h3>Trace it to the article and fix it</h3><p>Outdated, duplicated, contradicted, or missing. The costliest get rewritten first, each with an owner and a review date.</p>
+      <div class="tile s6 m-item"><span class="step-n">4</span><h3>Trace it to the article and fix it</h3><p>Outdated, duplicated, contradicted, or missing. The costliest get rewritten first, each with an owner and a review date.</p>
         <div data-nosnippet class="viz mini-doc">Support is available <del>9 to 5</del> <ins>8 to 8</ins> on weekdays.<div class="who"><span>Owner: Customer care</span><span>Review: every quarter</span></div></div></div>
     </div>
     <div class="receive">
@@ -300,8 +301,9 @@
         <h2>Start free. Pay once you see the problem.</h2>
         <p>Most teams start with the free check, then the audit. The monthly plan keeps the help center right after that.</p>
       </div>
-      <div class="plans">
-        <div class="plan">
+      <div class="mtabs on-dark" role="group" aria-label="Plans" data-for="plan-list"><button type="button" aria-pressed="false">Free</button><button type="button" aria-pressed="true">Audit</button><button type="button" aria-pressed="false">Monthly</button><button type="button" aria-pressed="false">Custom</button></div>
+      <div class="plans" id="plan-list">
+        <div class="plan m-item">
           <h3>Free answer check</h3>
           <p class="price">$0</p>
           <p class="term">Results in 5 business days. No access to your systems.</p>
@@ -311,9 +313,9 @@
             <li>A short video on the three that matter most</li>
             <li>No access to your systems needed</li>
           </ul>
-          <a class="btn btn-line" href="#contact" data-tab-target="tab-check" data-type="Free answer check">Get a free answer check</a>
+          <a class="btn btn-line" href="#contact" data-tab-target="tab-check" data-type="Free answer check">Get free check</a>
         </div>
-        <div class="plan pick">
+        <div class="plan pick m-item m-on">
           <span class="flag">Where most teams start</span>
           <h3>Audit and fix sprint</h3>
           <p class="price">$5,000<small>fixed</small></p>
@@ -325,10 +327,10 @@
             <li>An owner and a review date for every article</li>
             <li>A report you can take to leadership</li>
           </ul>
-          <a class="btn btn-light" href="#contact" data-tab-target="tab-check" data-type="Audit and fix sprint">Start with an audit</a>
+          <a class="btn btn-light" href="#contact" data-tab-target="tab-check" data-type="Audit and fix sprint">Start audit</a>
           <p class="note">If the audit is not worth the fee, we refund it.</p>
         </div>
-        <div class="plan">
+        <div class="plan m-item">
           <h3>Monthly plan</h3>
           <p class="price">$7,500<small>/ month</small></p>
           <p class="term">Starting price. Three-month minimum, then month to month.</p>
@@ -339,9 +341,9 @@
             <li>Review reminders so every article stays owned</li>
             <li>A monthly report on answers, gaps, and the tickets they caused</li>
           </ul>
-          <a class="btn btn-line" href="#contact" data-tab-target="tab-check" data-type="Monthly plan">Ask about the monthly plan</a>
+          <a class="btn btn-line" href="#contact" data-tab-target="tab-check" data-type="Monthly plan">Start monthly</a>
         </div>
-        <div class="plan">
+        <div class="plan m-item">
           <h3>One-time projects</h3>
           <p class="price">Custom</p>
           <p class="term">A fixed price for each project, quoted after a call.</p>
@@ -351,7 +353,7 @@
             <li>AI agent launch prep, before it answers its first customer</li>
             <li>Onboarding guides for customers and new support hires</li>
           </ul>
-          <a class="btn btn-line" href="#contact" data-tab-target="tab-check" data-type="A one-time project">Describe your project</a>
+          <a class="btn btn-line" href="#contact" data-tab-target="tab-check" data-type="A one-time project">Get a quote</a>
         </div>
       </div>
       <div class="hire" id="start">
@@ -444,7 +446,7 @@
   <div class="wrap">
     <div class="faq-top">
       <div class="head" style="margin:0"><h2>FAQ</h2><p>Anything else, ask us on the call.</p></div>
-      <a class="btn" href="#contact" data-tab-target="tab-book">Book a 25-minute call</a>
+      <a class="btn" href="#contact" data-tab-target="tab-book">Book a call</a>
     </div>
     <div class="faq">
         <details><summary>What do you need for the free answer check?</summary><p>Your help center address, and where customers reach your AI agent if it is public. No logins, no data exports, and no access to your systems.</p></details>
