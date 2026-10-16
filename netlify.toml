@@ -1,3 +1,7 @@
-# No build step. Netlify publishes the files in this folder as they are.
+# No build step. Netlify publishes the files in this folder as they are,
+# and deploys the form automation in netlify/functions.
 [build]
   publish = "."
+
+[functions]
+  directory = "netlify/functions"

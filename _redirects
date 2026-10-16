@@ -1,20 +1,21 @@
 # Netlify redirects. Old Squarespace URLs point to their closest new page (301 = permanent).
 # Pages that keep their old URL need no rule: /, /on-demand, /about-us, /support, /privacy-policy, /terms-and-conditions.
 
-/home                   /          301
-/business-solutions     /          301
-/case-study             /work      301
-/cart                   /support   301
-/individual-solutions   /          301
-/resume-profile-revamp  /          301
+/home                   /                  301
+/business-solutions     /                  301
+/case-study             /work              301
+/cart                   /support           301
+/individual-solutions   /                  301
+/resume-profile-revamp  /                  301
+/wrong-answer-report    /free-assessment   301!
 
 # /writing-sessions, /interview-prep and /full-mentorship are retired and return 404 on purpose.
+
+# Keep setup files off the public site.
+/README.md     /404.html  404!
+/netlify.toml  /404.html  404!
 
 # If https://docandwriter.com (no www) ever answers with the site instead of redirecting,
 # remove the # from the next two lines and push again.
 # http://docandwriter.com/*   https://www.docandwriter.com/:splat  301!
 # https://docandwriter.com/*  https://www.docandwriter.com/:splat  301!
-
-# Keep setup files off the public site.
-/README.md     /404.html  404!
-/netlify.toml  /404.html  404!

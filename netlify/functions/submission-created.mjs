@@ -1,0 +1,87 @@
+// Runs automatically after each verified Netlify Forms submission.
+// Optional automations, switched on by environment variables in Netlify
+// (Site configuration > Environment variables). If a variable is missing, that step is skipped.
+//
+//   RESEND_API_KEY    API key from resend.com, to email an automatic reply to the person who submitted
+//   AUTO_REPLY_FROM   Sender for that reply, e.g.  Doc & Writer <support@docandwriter.com>
+//   SLACK_WEBHOOK_URL Slack incoming webhook, to post each new lead to a channel
+
+const CAL = "https://calendly.com/docandwriter/discovery-call";
+
+const replies = {
+  "free-assessment": (d) => ({
+    subject: "Your free knowledge assessment",
+    text: `Hi ${first(d.name)},
+
+Thanks for requesting a knowledge assessment${d.company ? " for " + d.company : ""}. We will test 25 real customer questions against ${d.help_center_url || "your help center"} and send your results within five business days.
+
+If your help center or AI agent requires a login, reply to this email with a test account and we will use it.
+
+Want to talk sooner? Book a time here: ${CAL}
+
+Alexander Dade
+Doc & Writer
+https://www.docandwriter.com`,
+  }),
+  contact: (d) => ({
+    subject: "We received your message",
+    text: `Hi ${first(d.name)},
+
+Thanks for writing to Doc & Writer. We will reply within one business day.
+
+If you would rather talk now, book a time here: ${CAL}
+
+Alexander Dade
+Doc & Writer
+https://www.docandwriter.com`,
+  }),
+};
+
+function first(name) {
+  return String(name || "").trim().split(/\s+/)[0] || "there";
+}
+
+export const handler = async (event) => {
+  let payload;
+  try {
+    payload = JSON.parse(event.body).payload;
+  } catch {
+    return { statusCode: 400, body: "Bad payload" };
+  }
+  const form = payload.form_name;
+  const d = payload.data || {};
+  const tasks = [];
+
+  const build = replies[form];
+  if (process.env.RESEND_API_KEY && process.env.AUTO_REPLY_FROM && build && d.email) {
+    const { subject, text } = build(d);
+    tasks.push(
+      fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ from: process.env.AUTO_REPLY_FROM, to: [d.email], reply_to: "support@docandwriter.com", subject, text }),
+      })
+    );
+  }
+
+  if (process.env.SLACK_WEBHOOK_URL) {
+    const lines = [
+      `New ${form} submission`,
+      `${d.name || "No name"} <${d.email || "no email"}>${d.company ? ", " + d.company : ""}`,
+      d.help_center_url ? `Help center: ${d.help_center_url}` : "",
+      d.message ? `Message: ${String(d.message).slice(0, 500)}` : "",
+      d.topics ? `Topics: ${String(d.topics).slice(0, 300)}` : "",
+    ].filter(Boolean);
+    tasks.push(
+      fetch(process.env.SLACK_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: lines.join("\n") }),
+      })
+    );
+  }
+
+  const results = await Promise.allSettled(tasks);
+  results.forEach((r) => { if (r.status === "rejected") console.error(r.reason); });
+  return { statusCode: 200, body: "ok" };
+};

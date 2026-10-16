@@ -7,21 +7,24 @@ Plain HTML and CSS with one small JavaScript file. There is no build step. Netli
 | File | URL | Notes |
 |---|---|---|
 | `index.html` | `/` | Home page |
-| `on-demand.html` | `/on-demand` | Pricing. The old URL is kept on purpose, so Google keeps its history. |
-| `wrong-answer-report.html` | `/wrong-answer-report` | Free report request form (Netlify Forms) |
-| `work.html` | `/work` | Results and case studies. `/case-study` redirects here. |
+| `on-demand.html` | `/on-demand` | Knowledge Ops, the main offer and pricing. Old URL kept on purpose. |
+| `free-assessment.html` | `/free-assessment` | Free assessment request form (Netlify Forms) |
+| `work.html` | `/work` | Results. `/case-study` redirects here. |
 | `about-us.html` | `/about-us` | Old URL kept |
-| `partners.html` | `/partners` | For agencies, with a printable capabilities statement |
-| `support.html` | `/support` | Contact form. Old URL kept. |
+| `support.html` | `/support` | Booking calendar (Calendly) and contact form. Old URL kept. |
+| `partners.html` | `/partners` | For agencies, with a printable capabilities statement. Linked in the footer. |
 | `privacy-policy.html`, `terms-and-conditions.html` | same as before | |
 | `thanks.html` | `/thanks` | Where both forms land after sending |
 | `404.html` | any missing page | |
+| `netlify/functions/submission-created.mjs` | | Form automation: auto-reply email and Slack alert (see below) |
 | `_redirects` | | Sends old Squarespace pages to their new homes |
 | `_headers` | | Security and caching headers |
 | `sitemap.xml`, `robots.txt` | | For Google and Bing |
 | `assets/site.css`, `assets/site.js` | | Styles, the cost calculator, and the print button |
 | `assets/img/logo.svg` | | The quill, traced from the old site as a sharp vector |
 | `assets/fonts/` | | Source Serif 4 and Source Sans 3, self-hosted (SIL Open Font License) |
+
+If `wrong-answer-report.html` is still in this folder from the first version, delete it with `git rm wrong-answer-report.html`. A redirect already sends that address to `/free-assessment`.
 
 To edit text, open the page's `.html` file in Sublime, change the words, save, then commit and push. Netlify republishes in about a minute.
 
@@ -33,6 +36,25 @@ Add two square photos, at least 224 by 224 pixels:
 - `assets/img/lydia-dade.jpg`
 
 Until they exist, the site shows initials in their place.
+
+## Automations
+
+These run on their own once switched on. Each is optional.
+
+**New lead emails (built into Netlify).** Site configuration, then Notifications, then Emails and webhooks, then add an email notification for form submissions. Every assessment request and contact message lands in your inbox.
+
+**Booking calendar.** The contact page embeds your Calendly booking page (`calendly.com/docandwriter/discovery-call`). Calendly sends its own confirmations and reminders. To change the event, edit the link in `support.html`.
+
+**Automatic reply to the person who submitted a form.** `netlify/functions/submission-created.mjs` runs after each real (non-spam) submission. To switch it on:
+1. Create a free account at resend.com and add the domain `docandwriter.com`. Resend gives you DNS records (SPF and DKIM) to add in Squarespace DNS. Add them next to your Google records. Do not delete anything.
+2. In Netlify, Site configuration, then Environment variables, add:
+   - `RESEND_API_KEY` with your Resend API key
+   - `AUTO_REPLY_FROM` with `Doc & Writer <support@docandwriter.com>`
+3. Redeploy. Replies go out from support@ and answers come back to it.
+
+**Slack alert for each new lead.** Create a Slack incoming webhook for a channel, then add `SLACK_WEBHOOK_URL` in Netlify environment variables and redeploy.
+
+The reply text lives in `submission-created.mjs`. Edit it there.
 
 ## 1. Put the site on GitHub
 
