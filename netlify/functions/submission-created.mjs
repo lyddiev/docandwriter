@@ -19,8 +19,7 @@ If your help center or AI agent requires a login, reply to this email with a tes
 
 Want to talk sooner? Book a time here: ${CAL}
 
-Alexander Dade
-Doc & Writer
+The Doc & Writer team
 https://www.docandwriter.com`,
   }),
   contact: (d) => ({
@@ -31,8 +30,7 @@ Thanks for writing to Doc & Writer. We will reply within one business day.
 
 If you would rather talk now, book a time here: ${CAL}
 
-Alexander Dade
-Doc & Writer
+The Doc & Writer team
 https://www.docandwriter.com`,
   }),
 };
