@@ -113,7 +113,9 @@ h3 { font-size: 1.15rem; line-height: 1.3; letter-spacing: -.015em; }
   background:
     linear-gradient(to bottom, transparent 0, var(--paper) 92%),
     repeating-linear-gradient(to bottom, transparent 0 31px, color-mix(in srgb, var(--rule) 70%, transparent) 31px 32px); }
-.hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: 56px; align-items: center; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); gap: 36px 56px; align-items: start; }
+.hero .wrap > h1 { grid-column: 1 / -1; margin-bottom: 4px; max-width: 24ch; }
+.hero .hero-copy { padding-top: 8px; }
 .hero-copy { position: relative; }
 .hero h1 { margin-bottom: 22px; }
 .hero h1 .mark { position: relative; white-space: nowrap; }
@@ -163,6 +165,8 @@ h3 { font-size: 1.15rem; line-height: 1.3; letter-spacing: -.015em; }
 .doc.fixed del { display: inline; color: var(--red); text-decoration-thickness: 2px; text-decoration-color: var(--red); }
 .doc.fixed ins { display: inline; text-decoration: none; background: var(--ins); box-shadow: inset 0 -2px 0 var(--ink); padding: 0 2px; }
 .doc.fixed .orig { display: none; }
+.doc .fx { display: none; }
+.doc.fixed .fx { display: inline; }
 .note { position: absolute; right: 16px; bottom: 16px; left: 20px; padding: 10px 12px; border-radius: 12px; background: var(--sheet); border: 1px solid color-mix(in srgb, var(--red) 40%, var(--rule)); font-size: .8rem; line-height: 1.45; color: var(--ink-2); opacity: 0; transform: translateY(6px); transition: opacity .35s, transform .35s; }
 .note b { color: var(--red); font-weight: 600; }
 .note.on { opacity: 1; transform: none; }
@@ -407,7 +411,9 @@ h3 { font-size: 1.15rem; line-height: 1.3; letter-spacing: -.015em; }
 @media (max-width: 1080px) {
   .nav, .mast .bar > .btn-sm { display: none; }
   .menu { display: block; }
-  .hero .wrap { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .hero .wrap { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .hero .demo { margin-top: 16px; }
+  .br { display: none; }
   .hero .lede { max-width: 52ch; }
   .s7, .s5, .s6, .s4, .s8 { grid-column: span 12; }
   .r2 { grid-row: auto; }
