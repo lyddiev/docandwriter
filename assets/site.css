@@ -113,15 +113,17 @@ h3 { font-size: 1.15rem; line-height: 1.3; letter-spacing: -.015em; }
 /* Background: no pattern. One soft field of brand blue behind the demo, a cooler one top left, both fading out before the next section. */
 body::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1000px; pointer-events: none; z-index: -1;
   background:
-    radial-gradient(900px 620px at 82% 34%, rgba(47,107,234,.13), transparent 68%),
+    radial-gradient(1000px 640px at 50% 62%, rgba(47,107,234,.13), transparent 68%),
     radial-gradient(700px 480px at 8% 0%, rgba(22,40,60,.07), transparent 70%),
     linear-gradient(180deg, color-mix(in srgb, #2f6bea 4%, var(--paper)) 0%, var(--paper) 100%);
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 60%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 60%, transparent 100%); }
-.hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.04fr); grid-template-areas: "h1 demo" "copy demo"; gap: 26px 56px; align-items: start; }
-.hero .wrap > .demo { grid-area: demo; align-self: center; }
-.hero .wrap > .hero-copy { grid-area: copy; }
-.hero .wrap > h1 { grid-area: h1; align-self: end; margin: 0; font-size: clamp(2.5rem, 1.2rem + 3vw, 3.85rem); }
-.hero .hero-copy { padding-top: 0; }
+/* Centered stack: one line of promise, one line of how, two buttons, then the demo. */
+.hero .wrap { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.hero .wrap > .demo { width: 100%; max-width: 980px; margin-top: 56px; text-align: left; }
+.hero .hero-copy { display: flex; flex-direction: column; align-items: center; }
+.hero .actions { justify-content: center; }
+.hero .wrap > h1 { margin: 0 0 22px; max-width: 15ch; font-size: clamp(2.7rem, 1.3rem + 4.2vw, 5rem); }
+.hero .lede { max-width: 40ch; font-size: clamp(1.1rem, 1rem + .4vw, 1.3rem); }
 .hero-copy { position: relative; }
 .hero h1 { margin-bottom: 22px; }
 .hero h1 .mark { position: relative; white-space: nowrap; }
@@ -430,11 +432,8 @@ body::before { content: ""; position: absolute; top: 0; left: 0; right: 0; heigh
 @media (max-width: 1080px) {
   .nav, .mast .bar > .btn-sm { display: none; }
   .menu { display: block; }
-  .hero .wrap { grid-template-columns: minmax(0, 1fr); grid-template-areas: "h1" "copy" "demo"; gap: 24px; }
-  .hero .wrap > h1 { font-size: clamp(2.3rem, 1.4rem + 4vw, 3.6rem); }
-  .hero .demo { margin-top: 16px; }
+  .hero .wrap > .demo { margin-top: 40px; }
   .br { display: none; }
-  .hero .lede { max-width: 52ch; }
   .s7, .s5, .s6, .s4, .s8 { grid-column: span 12; }
   .r2 { grid-row: auto; }
   .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); }
