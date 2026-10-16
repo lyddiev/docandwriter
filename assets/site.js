@@ -2,7 +2,7 @@
 (function () {
   var root = document.documentElement;
 
-  // Theme switch. Follows the system until someone picks a side.
+  // Light or dark. Follows the system until someone picks one.
   var themeBtn = document.getElementById("theme");
   if (themeBtn) {
     themeBtn.addEventListener("click", function () {
@@ -13,6 +13,19 @@
       try { localStorage.setItem("dw-theme", next); } catch (e) {}
     });
   }
+
+  // Header rule appears once the page scrolls.
+  var mast = document.querySelector(".mast");
+  if (mast) {
+    var onScroll = function () { mast.classList.toggle("scrolled", window.scrollY > 8); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+
+  // Close the mobile menu after a link is chosen.
+  document.querySelectorAll(".menu nav a").forEach(function (a) {
+    a.addEventListener("click", function () { a.closest("details").removeAttribute("open"); });
+  });
 
   // Hero article: before and after.
   var art = document.getElementById("article");
@@ -26,8 +39,7 @@
     buttons.forEach(function (b) {
       b.addEventListener("click", function () { touched = true; show(b.getAttribute("data-show")); });
     });
-    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) { show("after"); }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { show("after"); }
     else { setTimeout(function () { if (!touched) show("after"); }, 1800); }
   }
 
@@ -49,14 +61,12 @@
     update();
   }
 
-  // Service request number on the contact form.
-  var srNo = document.getElementById("sr-no");
-  if (srNo) {
-    var d = new Date();
-    var id = "SR-" + String(d.getFullYear()).slice(2) + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(Math.floor(1000 + Math.random() * 9000));
-    srNo.textContent = id;
-    var field = document.getElementById("sr-field");
-    if (field) field.value = id;
+  // Buttons that name a plan preselect it in the contact form.
+  var pick = document.getElementById("f-type");
+  if (pick) {
+    document.querySelectorAll("[data-type]").forEach(function (a) {
+      a.addEventListener("click", function () { pick.value = a.getAttribute("data-type"); });
+    });
   }
 
   var printBtn = document.getElementById("print-cap");

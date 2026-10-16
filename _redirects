@@ -1,13 +1,20 @@
-# Netlify redirects. Old Squarespace URLs point to their closest new page (301 = permanent).
-# Pages that keep their old URL need no rule: /, /on-demand, /about-us, /support, /privacy-policy, /terms-and-conditions.
+# Netlify redirects (301 = permanent). The site is now one page; old pages point to their section.
+# The ! forces the redirect even while the old .html file still exists in the repo.
 
-/home                   /                  301
-/business-solutions     /                  301
-/case-study             /work              301
-/cart                   /support           301
-/individual-solutions   /                  301
-/resume-profile-revamp  /                  301
-/wrong-answer-report    /free-assessment   301!
+/on-demand              /#pricing   301!
+/work                   /#results   301!
+/about-us               /#about     301!
+/support                /#contact   301!
+/free-assessment        /#contact   301!
+
+# Old Squarespace URLs
+/home                   /           301
+/business-solutions     /           301
+/individual-solutions   /           301
+/resume-profile-revamp  /           301
+/case-study             /#results   301!
+/cart                   /#contact   301!
+/wrong-answer-report    /#contact   301!
 
 # /writing-sessions, /interview-prep and /full-mentorship are retired and return 404 on purpose.
 

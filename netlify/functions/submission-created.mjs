@@ -8,31 +8,37 @@
 
 const CAL = "https://calendly.com/docandwriter/discovery-call";
 
-const replies = {
-  "free-assessment": (d) => ({
-    subject: "Your free knowledge assessment",
-    text: `Hi ${first(d.name)},
+const checkReply = (d) => ({
+  subject: "Your free answer check",
+  text: `Hi ${first(d.name)},
 
-Thanks for requesting a knowledge assessment${d.company ? " for " + d.company : ""}. We will test 25 real customer questions against ${d.help_center_url || "your help center"} and send your results within five business days.
+Thanks for requesting a free answer check${d.company ? " for " + d.company : ""}. We will test 25 customer questions against ${d.help_center_url || "your help center"}${d.ai_agent ? " and your AI agent" : ""}, and send your results within five business days.
 
-If your help center or AI agent requires a login, reply to this email with a test account and we will use it.
+If your help center or agent requires a login, the check covers what is public. Reply to this email if you would like to share a test account.
 
 Want to talk sooner? Book a time here: ${CAL}
 
 The Doc & Writer team
 https://www.docandwriter.com`,
-  }),
-  contact: (d) => ({
-    subject: "We received your message",
-    text: `Hi ${first(d.name)},
+});
 
-Thanks for writing to Doc & Writer. We will reply within one business day.
+const generalReply = (d) => ({
+  subject: "We received your request",
+  text: `Hi ${first(d.name)},
+
+Thanks for writing to Doc & Writer${d.request_type ? " about the " + String(d.request_type).toLowerCase() : ""}. We will reply within one business day.
 
 If you would rather talk now, book a time here: ${CAL}
 
 The Doc & Writer team
 https://www.docandwriter.com`,
-  }),
+});
+
+// The contact form carries a request_type. "free-assessment" is the retired form name, kept for old submissions.
+const pickReply = (form, d) => {
+  if (form === "free-assessment") return checkReply;
+  if (form === "contact") return d.request_type === "Free answer check" ? checkReply : generalReply;
+  return null;
 };
 
 function first(name) {
@@ -50,7 +56,7 @@ export const handler = async (event) => {
   const d = payload.data || {};
   const tasks = [];
 
-  const build = replies[form];
+  const build = pickReply(form, d);
   if (process.env.RESEND_API_KEY && process.env.AUTO_REPLY_FROM && build && d.email) {
     const { subject, text } = build(d);
     tasks.push(
@@ -64,11 +70,11 @@ export const handler = async (event) => {
 
   if (process.env.SLACK_WEBHOOK_URL) {
     const lines = [
-      `New ${form} submission`,
+      `New request: ${d.request_type || form}`,
       `${d.name || "No name"} <${d.email || "no email"}>${d.company ? ", " + d.company : ""}`,
       d.help_center_url ? `Help center: ${d.help_center_url}` : "",
       d.message ? `Message: ${String(d.message).slice(0, 500)}` : "",
-      d.topics ? `Topics: ${String(d.topics).slice(0, 300)}` : "",
+      d.ai_agent ? `AI agent: ${String(d.ai_agent).slice(0, 200)}` : "",
     ].filter(Boolean);
     tasks.push(
       fetch(process.env.SLACK_WEBHOOK_URL, {
