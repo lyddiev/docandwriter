@@ -12,7 +12,7 @@ const checkReply = (d) => ({
   subject: "Your free answer check",
   text: `Hi ${first(d.name)},
 
-Thanks for requesting a free answer check${d.company ? " for " + d.company : ""}. We will test 25 customer questions against ${d.help_center_url || "your help center"}${d.ai_agent ? " and your AI agent" : ""}, and send your results within five business days.
+Thanks for requesting a free answer check${d.company ? " for " + d.company : ""}. We will ask ${d.ai_agent ? "your AI agent" : (d.help_center_url || "your help center")} 10 questions your own pages answer, and send a 3 minute video of what we find within three business days.
 
 If your help center or agent requires a login, the check covers what is public. Reply to this email if you would like to share a test account.
 

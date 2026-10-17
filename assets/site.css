@@ -425,6 +425,16 @@ body::before { content: ""; position: absolute; top: 0; left: 0; right: 0; heigh
 .cap dd { margin: 0; }
 .legal-body { padding-bottom: 72px; }
 
+/* Two plans, centered */
+.plans.two { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 880px; margin: 0 auto; }
+.plans-more { text-align: center; color: var(--on-night-2); margin: 24px auto 0; max-width: 60ch; font-size: .95rem; }
+.plans-more a { color: var(--on-night); }
+/* Approval batch illustration */
+.approve { display: grid; gap: 8px; }
+.approve div { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 9px 12px; border-radius: 10px; background: var(--sheet); border: 1px solid var(--rule); font-size: .86rem; }
+.approve em { font-style: normal; font-size: .74rem; font-weight: 600; white-space: nowrap; color: var(--green); background: var(--greenwash); padding: 3px 9px; border-radius: 999px; }
+.approve em.wait { color: var(--graphite); background: var(--paper-2); }
+
 /* Mobile-only switchers (steps, plans). Desktop shows everything. */
 .mtabs { display: none; }
 
@@ -470,7 +480,7 @@ body::before { content: ""; position: absolute; top: 0; left: 0; right: 0; heigh
   .funnel div { grid-template-columns: 96px minmax(0, 1fr) 52px; gap: 10px; }
   .dark { border-radius: 26px; margin: 0 8px; }
   .plan { padding: 24px; }
-  .plans { grid-template-columns: minmax(0, 1fr); }
+  .plans, .plans.two { grid-template-columns: minmax(0, 1fr); }
   .projects { grid-template-columns: minmax(0, 1fr); padding: 22px; }
   .hire { margin-top: 64px; }
   .track { grid-template-columns: minmax(0, 1fr); gap: 0; }
